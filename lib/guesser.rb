@@ -2,7 +2,7 @@ module Guesser
   def guess_letter
     puts 'Guess a letter!'
     guess = gets.chomp
-    valid_guess?(guess) ? guess : guess_letter
+    valid_guess?(guess) ? guess : [puts('Not valid!'), guess_letter]
   end
 
   def valid_guess?(guess)

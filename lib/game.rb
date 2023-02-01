@@ -4,7 +4,7 @@ class Game
   def initialize(mode=choose_role)
     player_guesser if mode == '1'
     player_word_chooser if mode == '2'
-    start_game
+    run_game
   end
 
   def choose_role
@@ -21,5 +21,11 @@ class Game
   def player_word_chooser
     @word_chooser = Player.new('Word chooser')
     @guesser = Computer.new('Guesser')
+  end
+
+  def run_game
+    @word = @word_chooser.choose_word
+    @guess = @guesser.guess_letter
+    puts @guess
   end
 end

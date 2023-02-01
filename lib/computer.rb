@@ -1,6 +1,8 @@
+require_relative 'guesser'
 require_relative 'word_chooser'
 
 class Computer
+  include Guesser
   include WordChooser
   attr_accessor :role
 

@@ -1,5 +1,4 @@
 module WordChooser
-
   def choose_word
     puts "Enter a word between 5 and 12 letters long."
     word = gets.chomp.to_s

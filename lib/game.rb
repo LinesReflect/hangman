@@ -35,7 +35,7 @@ class Game
     @guess = @guesser.guess_letter
     correct_guess? ? correct_letter : wrong_letter
     update_display_info
-    winner? ? congratulate_winner : new_turn
+    winner? ? [clear_guesses, congratulate_winner] : new_turn
   end
 
   def update_display_info
@@ -77,8 +77,12 @@ class Game
   end
 
   def congratulate_winner
-    zero_guesses? ? puts('Word Chooser wins! Congrats!') : puts('Guesser wins! Congrats!')
     puts "The word was #{@word}."
+    zero_guesses? ? puts('Word Chooser wins! Congrats!') : puts('Guesser wins! Congrats!')
+  end
+
+  def clear_guesses
+    @guesser.guessed_letters.clear
   end
 
   def end_game

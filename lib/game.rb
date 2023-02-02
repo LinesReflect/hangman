@@ -55,6 +55,7 @@ class Game
   end
 
   def correct_letter
+    puts 'Correct'
     @word.chars.each_with_index { |char, idx| @word_arr[idx] = @guess if char.downcase == @guess}
     end_game if complete_word?
   end

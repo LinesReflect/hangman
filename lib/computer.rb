@@ -23,6 +23,7 @@ class Computer
     sleep(2)
     @guess = (('a'..'z').to_a - guessed_letters).sample
     if valid_guess?(@guess)
+      puts @guess
       guessed_letters.push(@guess)
       @guess
     else

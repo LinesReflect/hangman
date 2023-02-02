@@ -14,7 +14,20 @@ class Computer
     word_list = File.open('../10000-words.txt').each_line.collect do |line|
       line.downcase
     end
-    word = word_list.sample
-    (word.length - 1).between?(5, 12) ? word : choose_word
+    @word = word_list.sample.gsub("\n", '')
+    @word.length.between?(5, 12) ? @word : choose_word
+  end
+
+  def guess_letter
+    puts 'Thinking...'
+    sleep(2)
+    @guess = (('a'..'z').to_a - guessed_letters).sample
+    if valid_guess?(@guess)
+      guessed_letters.push(@guess)
+      @guess
+    else
+      puts 'Not valid!'
+      guess_letter
+    end
   end
 end

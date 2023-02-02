@@ -26,8 +26,8 @@ class Game
 
   def run_game
     @word = @word_chooser.choose_word
-    puts @word
     @word_arr = Array.new(@word.length, '_')
+    update_display_info
     new_turn
   end
 
@@ -35,7 +35,7 @@ class Game
     @guess = @guesser.guess_letter
     correct_guess? ? correct_letter : wrong_letter
     update_display_info
-    winner? ? puts('gg') : new_turn
+    winner? ? congratulate_winner : new_turn
   end
 
   def update_display_info
@@ -74,6 +74,11 @@ class Game
 
   def winner?
     complete_word? || zero_guesses?
+  end
+
+  def congratulate_winner
+    zero_guesses? ? puts('Word Chooser wins! Congrats!') : puts('Guesser wins! Congrats!')
+    puts "The word was #{@word}."
   end
 
   def end_game

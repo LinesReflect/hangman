@@ -15,7 +15,7 @@ def play_again
   puts "Would you like to play again? Y/N"
   answer = gets.chomp
   if ['Y', 'y', 'N', 'n'].include?(answer)
-    answer == 'Y' ? start_game : return
+    ['Y', 'y'].include?(answer) ? start_game : return
   else
     play_again
   end

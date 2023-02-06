@@ -7,7 +7,7 @@ download = URI.open('https://raw.githubusercontent.com/first20hours/google-10000
 IO.copy_stream(download, '../10000-words.txt')
 
 def start_game
-  Game.new
+  Game.new.choose_role
   play_again
 end
 
@@ -21,5 +21,6 @@ def play_again
   end
 end
 
-puts 'Hello and welcome to Hangman user!'
+puts 'Hello user, welcome to Hangman!'
+
 start_game

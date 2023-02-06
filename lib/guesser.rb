@@ -2,10 +2,10 @@ module Guesser
   @@guessed_letters = []
 
   def guess_letter
-    puts 'Guess a letter!'
+    puts "Guess a letter or type 'SAVE' to save this game."
     guess = gets.chomp
     if valid_guess?(guess)
-      @@guessed_letters.push(guess)
+      @@guessed_letters.push(guess) unless guess == 'SAVE'
       guess
     else
       puts 'Not valid!'
@@ -26,7 +26,7 @@ module Guesser
   end
 
   def valid_guess?(guess)
-    valid_length?(guess) && valid_charachter?(guess) && !@@guessed_letters.include?(guess)
+    guess == 'SAVE' || (valid_length?(guess) && valid_charachter?(guess) && !@@guessed_letters.include?(guess))
   end
 
   def guessed_letters

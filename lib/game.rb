@@ -96,4 +96,22 @@ class Game
   def end_game
     return
   end
+
+  def import_data(data)
+    @name = data.values[1]
+    @mode = data.values[2]
+    @guesser = data.values[3]
+    @word_chooser = data.values[4]
+    @word = data.values[5]
+    @word_arr = data.values[6]
+    @wrong_guesses = data.values[8]
+    continue_game
+  end
+
+  def continue_game
+    player_guesser if @mode == '1'
+    player_word_chooser if @mode == '2'
+    update_display_info
+    new_turn
+  end
 end

@@ -7,8 +7,19 @@ download = URI.open('https://raw.githubusercontent.com/first20hours/google-10000
 IO.copy_stream(download, '../10000-words.txt')
 
 def start_game
-  Game.new.choose_role
+  puts "Would you like to load a saved game? 'Y/N'"
+  answer = gets.chomp
+  load_game(answer) ? Game.new.list_saved_games : Game.new.choose_role
   play_again
+end
+
+def load_game(answer)
+  if ['Y', 'y', 'N', 'n'].include?(answer)
+    ['Y', 'y'].include?(answer)
+  else
+    puts 'Not valid!'
+    start_game
+  end
 end
 
 def play_again

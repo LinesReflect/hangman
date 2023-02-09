@@ -1,3 +1,9 @@
+require_relative 'player'
+require_relative 'computer'
+require_relative 'word_chooser'
+require_relative 'guesser'
+require 'json'
+
 module SaveGame
   attr_accessor :name, :guesser, :word_chooser, :word, :word_arr
 
@@ -16,7 +22,7 @@ module SaveGame
   end
 
   def game_data
-    JSON.generate(@data)
+    @data.to_json
   end
 
   def save_game

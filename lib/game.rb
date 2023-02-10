@@ -2,12 +2,11 @@ require_relative 'load_game'
 require_relative 'save_game'
 require_relative 'guesser'
 require 'json'
-require 'fileutils'
 
 class Game
   include LoadGame
   include SaveGame
-  
+
   attr_accessor :name, :guesser, :word_chooser, :word, :word_arr
 
   def choose_role
@@ -40,7 +39,7 @@ class Game
   def new_turn
     @guess = @guesser.guess_letter
     save_game if @guess == 'SAVE'
-    correct_guess? ? correct_letter : wrong_letter
+    correct_guess? ? correct_letter : wrong_letter unless @guess == 'SAVE'
     update_display_info
     winner? ? [clear_guesses, congratulate_winner] : new_turn
   end

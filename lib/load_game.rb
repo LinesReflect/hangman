@@ -12,10 +12,14 @@ module LoadGame
   end
 
   def list_saved_games
-    @saved_games_arr = []
-    Dir.each_child('../saved_games') { |filename| @saved_games_arr.push(filename) }
-    @saved_games_arr.each_with_index { |filename, idx| puts "#{idx + 1}: '#{filename.chomp('.json')}'" }
-    choose_saved_game(@saved_games_arr)
+    if Dir.exist?('../saved_games')
+      @saved_games_arr = []
+      Dir.each_child('../saved_games') { |filename| @saved_games_arr.push(filename) }
+      @saved_games_arr.each_with_index { |filename, idx| puts "#{idx + 1}: '#{filename.chomp('.json')}'" }
+      no_saves? ? starting_new_game : choose_saved_game(@saved_games_arr)
+    else
+      starting_new_game
+    end
   end
 
   def choose_saved_game(saved_games_arr)
@@ -26,5 +30,14 @@ module LoadGame
 
   def valid_file_number?(file_number, saved_games_arr)
     file_number.chars.all? { |char| (1..saved_games_arr.length).include?(char.to_i) }
+  end
+
+  def no_saves?
+    @saved_games_arr.length.zero?
+  end
+
+  def starting_new_game
+    puts 'Looks like there are no saved games. Lets start a new one!'
+    Game.new.choose_role
   end
 end

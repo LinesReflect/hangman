@@ -7,15 +7,13 @@ require 'json'
 
 module LoadGame
   def load_game(file_number)
-    json_file = File.open("./saved_games/#{@saved_games_arr[file_number.to_i - 1]}")
-    data = json_file.read
-    Game.new.import_data(JSON.parse(data))
+    json_file = File.read("../saved_games/#{@saved_games_arr[file_number.to_i - 1]}")
+    Game.new.import_data(JSON.parse(json_file))
   end
 
   def list_saved_games
-    Dir.chdir('..') unless Dir.pwd == "hangman"
     @saved_games_arr = []
-    Dir.each_child('saved_games') { |filename| @saved_games_arr.push(filename) }
+    Dir.each_child('../saved_games') { |filename| @saved_games_arr.push(filename) }
     @saved_games_arr.each_with_index { |filename, idx| puts "#{idx + 1}: '#{filename.chomp('.json')}'" }
     choose_saved_game(@saved_games_arr)
   end

@@ -31,8 +31,6 @@ module SaveGame
     save_data
     save_game_file(game_data)
     puts 'Succesfully Saved!'
-    update_display_info
-    new_turn
   end
 
   def save_game_file(game_data)
@@ -43,7 +41,7 @@ module SaveGame
     File.open(filename, 'w') do |file|
       file.puts game_data
     end
-    Dir.chdir("..")
+    Dir.chdir("../lib")
   end
 
   def sort_data
